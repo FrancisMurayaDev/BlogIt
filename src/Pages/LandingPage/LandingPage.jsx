@@ -5,6 +5,7 @@ function LandingPage() {
   return (
     <>
     <NavBar />
+    <Box>
     <Container maxWidth="md" sx={{ textAlign: "center", mt: 10 }}>
         <Typography variant="h3" fontWeight="bold" gutterBottom>
           Share your story with the Worldd
@@ -21,6 +22,7 @@ function LandingPage() {
           </Button>
         </Stack>
       </Container>
+    </Box>
       
     </>
   )

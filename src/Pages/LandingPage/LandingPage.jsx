@@ -1,12 +1,15 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import { Box, Typography, Button, Container, Stack } from "@mui/material";
+import heroBg from "../../assets/heroBg"
 
 function LandingPage() {
   return (
     <>
     <NavBar />
     <Box>
-      sx={{}}
+      sx={{
+
+      }}
     <Container maxWidth="md" sx={{ textAlign: "center", mt: 10 }}>
         <Typography variant="h3" fontWeight="bold" gutterBottom>
           Share your story with the Worldd

@@ -73,7 +73,7 @@ export default function ArticlePage() {
 
         <Grid container spacing={2}>
           {moreArticles.map((article) => (
-            <Grid item xs={12} sm={6} key={article.id}>
+            <Grid xs={12} sm={6} key={article.id}>
               <Box border={1} borderColor="grey.300" borderRadius={2} p={2}>
                 <img
                   src={article.image}

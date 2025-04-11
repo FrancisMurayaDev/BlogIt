@@ -9,12 +9,13 @@ import {
   Grid,
 } from "@mui/material";
 import NavBar from "../../Components/NavBar/NavBar";
+// import blogImg from "../../../public/blog-img.jpg"
 
 const mockArticle = {
   id: 1,
   title: "My First Blog Post",
   body: "This is the full content of the blog post. It's just sample text for now...",
-  image: "https://source.unsplash.com/random/800x400?blog",
+  image: "../../../public/blog-img.jpg",
   excerpt: "Quick look into my writing journey...",
   author: "FrancisDev",
   authorAvatar: "",
@@ -26,13 +27,13 @@ const moreArticles = [
     id: 2,
     title: "Second Post",
     excerpt: "A follow-up on my blogging adventures.",
-    image: "https://source.unsplash.com/random/800x401?writing",
+    image: "../../../public/blog-img.jpg",
   },
   {
     id: 3,
     title: "Learning Full Stack",
     excerpt: "Sharing lessons from building apps.",
-    image: "https://source.unsplash.com/random/800x402?tech",
+    image: "../../../public/blog-img.jpg",
   },
 ];
 

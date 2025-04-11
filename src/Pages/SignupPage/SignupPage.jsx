@@ -41,7 +41,6 @@ function SignupPage() {
     setTimeout(() => {
       setLoading(false);
       console.log("User signed up:", formData);
-
     }, 1500);
   }
 
@@ -54,12 +53,57 @@ function SignupPage() {
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
-          <TextField fullWidth label="First Name" name="firstName" margin="normal" required onChange={handleChange} />
-          <TextField fullWidth label="Last Name" name="lastName" margin="normal" required onChange={handleChange} />
-          <TextField fullWidth label="Email" name="email" type="email" margin="normal" required onChange={handleChange} />
-          <TextField fullWidth label="Username" name="username" margin="normal" required onChange={handleChange} />
-          <TextField fullWidth label="Password" name="password" type="password" margin="normal" required onChange={handleChange} />
-          <TextField fullWidth label="Confirm Password" name="confirmPassword" type="password" margin="normal" required onChange={handleChange} />
+          <TextField
+            fullWidth
+            label="First Name"
+            name="firstName"
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="Last Name"
+            name="lastName"
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="Email"
+            name="email"
+            type="email"
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="Username"
+            name="username"
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="Password"
+            name="password"
+            type="password"
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            margin="normal"
+            required
+            onChange={handleChange}
+          />
 
           {error && (
             <Typography color="error" sx={{ mt: 1 }}>
@@ -67,8 +111,19 @@ function SignupPage() {
             </Typography>
           )}
 
-          <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 2 }} disabled={loading}>
-            {loading ? <CircularProgress size={24} color="inherit" /> : "Create Account"}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            disabled={loading}
+          >
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Create Account"
+            )}
           </Button>
 
           <Typography align="center" sx={{ mt: 2 }}>
@@ -83,4 +138,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage
+export default SignupPage;

@@ -26,11 +26,13 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
-    
     setTimeout(() => {
-      if (formData.identifier === "testuser" && formData.password === "password") {
+      if (
+        formData.identifier === "testuser" &&
+        formData.password === "password"
+      ) {
         console.log("Login successful");
-        navigate("/blogs"); 
+        navigate("/blogs");
       } else {
         setError("Invalid username/email or password.");
       }
@@ -71,8 +73,19 @@ export default function LoginPage() {
             </Typography>
           )}
 
-          <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 2 }} disabled={loading}>
-            {loading ? <CircularProgress size={24} color="inherit" /> : "Sign In"}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2 }}
+            disabled={loading}
+          >
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Sign In"
+            )}
           </Button>
 
           <Typography align="center" sx={{ mt: 2 }}>

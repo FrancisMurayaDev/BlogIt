@@ -54,7 +54,12 @@ export default function WritePage() {
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Button variant="outlined" component="label">
             Upload Featured Image
-            <input type="file" accept="image/*" hidden onChange={handleImageUpload} />
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleImageUpload}
+            />
           </Button>
 
           {imagePreview && (
@@ -104,7 +109,11 @@ export default function WritePage() {
             disabled={loading}
             fullWidth
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : "Publish"}
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Publish"
+            )}
           </Button>
         </Box>
       </Container>

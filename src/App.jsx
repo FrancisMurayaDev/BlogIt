@@ -16,7 +16,8 @@ function App() {
         <Route path="/login" element={<LogingPage />} />
         <Route path="/blogs" element={<BlogListingPage />} />
         <Route path="/write" element={<WritePage />} />
-        <Route path="/article" element={<ArticlePage />} />
+        {/* <Route path="/article" element={<ArticlePage />} /> */}
+        <Route path="/blog/:id" element={<ArticlePage />} />
       </Routes>
     </>
   );

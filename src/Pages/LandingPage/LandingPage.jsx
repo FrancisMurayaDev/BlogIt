@@ -24,7 +24,7 @@ function LandingPage() {
             left: 0,
             width: "100%",
             height: "100%",
-            bgcolor: "rgba(33, 28, 46, 0.6)",
+            bgcolor: "rgba(40, 24, 86, 0.6)",
             zIndex: -1,
           },
         }}

@@ -25,7 +25,7 @@ export default function MyProfilePage() {
   const [personalInfo, setPersonalInfo] = useState({
     firstName: "Francis",
     lastName: "Muraya",
-    email: "francis@example.com",
+    email: "francis@dev.com",
     username: "FrancisDev",
   });
 
@@ -133,7 +133,7 @@ export default function MyProfilePage() {
         <Divider sx={{ my: 4 }} />
 
         
-        
+
         <Typography variant="h6">Personal Info</Typography>
         <Box component="form" sx={{ mt: 2 }}>
           <TextField

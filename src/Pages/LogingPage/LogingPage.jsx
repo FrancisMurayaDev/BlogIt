@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../Components/NavBar/NavBar";
 import apiUrl from "../../utils/apiUrl.js";
+import axios from "axios";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ identifier: "", password: "" });
@@ -22,23 +23,25 @@ export default function LoginPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    setTimeout(() => {
-      if (
-        formData.identifier === "testuser" &&
-        formData.password === "password"
-      ) {
-        console.log("Login successful");
-        navigate("/blogs");
-      } else {
-        setError("Invalid username/email or password.");
-      }
+    try {
+      const res = await axios.post(`${apiUrl}/auth/login`, formData);
+
+      
+      localStorage.setItem("token", res.data.token);
+
+      
+      navigate("/blogs");
+    } catch (err) {
+      console.error("Login error:", err.response?.data);
+      setError(err.response?.data?.message || "Login failed");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   }
 
   return (

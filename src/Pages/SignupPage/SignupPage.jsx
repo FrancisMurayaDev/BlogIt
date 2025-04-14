@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../Components/NavBar/NavBar";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import apiUrl from "../../utils/apiUrl"
+import apiUrl from "../../utils/apiUrl";
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -23,43 +23,43 @@ function SignupPage() {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const {isPending, mutate} = useMutation({
-    mutationKey:["register-user"],
-    mutationFn: async () => {
-      const response = await axios.post (`${apiUrl}/api/auth/signup`,{
-        formData
-      })
+  const { isPending, mutate } = useMutation({
+    mutationKey: ["register-user"],
+    mutationFn: async (data) => {
+      const response = await axios.post(`${apiUrl}/auth/signup`, data);
       return response.data;
     },
-    onSuccess: ()=> {
-      navigate("/login")
-    }
-  })
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+    onSuccess: () => {
+      navigate("/login");
+    },
+    onError: (err) => {
+      console.error("Signup error:", err.response?.data);
+      setError(err.response?.data?.message || "Signup failed");
+    },
+  });
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match.");
-      setLoading(false);
       return;
     }
 
-    setTimeout(() => {
-      setLoading(false);
-      console.log("User signed up:", formData);
-    }, 1500);
-  }
+    const { confirmPassword, ...submitData } = formData;
+    mutate(submitData);
+  };
 
   return (
     <>
@@ -134,9 +134,9 @@ function SignupPage() {
             variant="contained"
             color="primary"
             sx={{ mt: 2 }}
-            disabled={loading}
+            disabled={isPending}
           >
-            {loading ? (
+            {isPending ? (
               <CircularProgress size={24} color="inherit" />
             ) : (
               "Create Account"

@@ -8,8 +8,11 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../Components/NavBar/NavBar";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import apiUrl from "../../utils/apiUrl"
 
 function SignupPage() {
   const [formData, setFormData] = useState({
@@ -20,6 +23,20 @@ function SignupPage() {
     password: "",
     confirmPassword: "",
   });
+  const navigate = useNavigate();
+
+  const {isPending, mutate} = useMutation({
+    mutationKey:["register-user"],
+    mutationFn: async () => {
+      const response = await axios.post (`${apiUrl}/api/auth/signup`,{
+        formData
+      })
+      return response.data;
+    },
+    onSuccess: ()=> {
+      navigate("/login")
+    }
+  })
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

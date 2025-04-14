@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../Components/NavBar/NavBar";
+import apiUrl from "../../utils/apiUrl.js";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ identifier: "", password: "" });

@@ -8,16 +8,21 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import NavBar from "../../Components/NavBar/NavBar";
+import apiUrl from "../../utils/apiUrl.js"; 
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function WritePage() {
   const [blogData, setBlogData] = useState({
     title: "",
     excerpt: "",
     body: "",
-    imageFile: null,
+    image: "",
   });
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setBlogData({ ...blogData, [e.target.name]: e.target.value });
@@ -26,21 +31,38 @@ export default function WritePage() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setBlogData({ ...blogData, imageFile: file });
       const reader = new FileReader();
-      reader.onloadend = () => setImagePreview(reader.result);
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        setBlogData((prev) => ({ ...prev, image: reader.result }));
+      };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
-    setTimeout(() => {
-      console.log("Blog submitted:", blogData);
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await axios.post(`${apiUrl}/blogs`, blogData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log("Blog posted:", res.data);
+      navigate("/myblogs");
+    } catch (err) {
+      console.error("Blog post failed:", err.response?.data);
+      setError(err.response?.data?.message || "Failed to post blog");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -100,6 +122,12 @@ export default function WritePage() {
             margin="normal"
             onChange={handleChange}
           />
+
+          {error && (
+            <Typography color="error" sx={{ mt: 2 }}>
+              {error}
+            </Typography>
+          )}
 
           <Button
             type="submit"

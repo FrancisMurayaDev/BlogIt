@@ -1,30 +1,31 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, CircularProgress } from "@mui/material";
 import NavBar from "../../Components/NavBar/NavBar";
 import BlogCard from "../../Components/BlogCard/BlogCard";
-// import img from "../../../public/hero-bg.jpg"
-
-const mockBlogs = [
-  {
-    id: 1,
-    title: "My First Blog Post",
-    excerpt: "This is a quick look into my writing journey...",
-    image: "../../../public/hero-bg.jpg",
-    author: "FrancisDev",
-    authorAvatar: "",
-    updatedAt: "Apr 10, 2025",
-  },
-  {
-    id: 2,
-    title: "Lessons from Full Stack Development",
-    excerpt: "What I’ve learned building modern web apps...",
-    image: "../../../public/hero-bg.jpg",
-    author: "FrancisDev",
-    authorAvatar: "",
-    updatedAt: "Apr 8, 2025",
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
+import apiUrl from "../../utils/apiUrl";
 
 export default function BlogListingPage() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axios.get(`${apiUrl}/api/blogs`);
+        setBlogs(res.data);
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+        setError("Failed to load blogs.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -32,9 +33,16 @@ export default function BlogListingPage() {
         <Typography variant="h4" align="center" gutterBottom>
           Latest Blogs
         </Typography>
-        {mockBlogs.map((blog) => (
-          <BlogCard key={blog.id} blog={blog} />
-        ))}
+
+        {loading ? (
+          <CircularProgress />
+        ) : error ? (
+          <Typography color="error">{error}</Typography>
+        ) : blogs.length === 0 ? (
+          <Typography align="center">No blogs available yet.</Typography>
+        ) : (
+          blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
+        )}
       </Container>
     </>
   );

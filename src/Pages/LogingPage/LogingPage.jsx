@@ -19,22 +19,25 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setLoading(true);
 
     try {
-      const res = await axios.post(`${apiUrl}/auth/login`, formData);
+      const res = await axios.post(`${apiUrl}/auth/login`, {
+        identifier: formData.identifier,
+        password: formData.password,
+      });
 
-      
       localStorage.setItem("token", res.data.token);
-
-      
       navigate("/blogs");
     } catch (err) {
       console.error("Login error:", err.response?.data);
@@ -42,7 +45,7 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <>

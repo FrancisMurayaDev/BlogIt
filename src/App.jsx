@@ -21,9 +21,9 @@ function App() {
         <Route path="/write" element={<WritePage />} />
         {/* <Route path="/article" element={<ArticlePage />} /> */}
         <Route path="/blog/:id" element={<ArticlePage />} />
-        <Route path="/myblogs" element={<MyBlogsPage />}/>
+        <Route path="/myblogs" element={<MyBlogsPage />} />
         <Route path="/edit/:id" element={<EditBlogPage />} />
-        <Route path="/profile" element={<MyProfilePage />}/>
+        <Route path="/profile" element={<MyProfilePage />} />
       </Routes>
     </>
   );

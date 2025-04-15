@@ -18,7 +18,7 @@ const mockBlog = {
   image: "../../../public/blog-img.jpg",
 };
 
- function EditBlogPage() {
+function EditBlogPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [blogData, setBlogData] = useState({
@@ -30,7 +30,6 @@ const mockBlog = {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-
     setBlogData({
       title: mockBlog.title,
       excerpt: mockBlog.excerpt,
@@ -112,7 +111,11 @@ const mockBlog = {
             disabled={loading}
             fullWidth
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : "Update Blog"}
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Update Blog"
+            )}
           </Button>
         </Box>
       </Container>

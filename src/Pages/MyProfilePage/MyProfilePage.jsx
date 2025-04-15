@@ -61,16 +61,12 @@ export default function MyProfilePage() {
           My Profile
         </Typography>
 
-        
         <Typography variant="h6" sx={{ mt: 4 }}>
           Profile Info
         </Typography>
         <Box component="form" sx={{ mt: 2 }}>
           <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
-            <Avatar
-              src={profileImage}
-              sx={{ width: 72, height: 72, mr: 2 }}
-            />
+            <Avatar src={profileImage} sx={{ width: 72, height: 72, mr: 2 }} />
 
             <Button
               variant="outlined"
@@ -131,8 +127,6 @@ export default function MyProfilePage() {
         </Box>
 
         <Divider sx={{ my: 4 }} />
-
-        
 
         <Typography variant="h6">Personal Info</Typography>
         <Box component="form" sx={{ mt: 2 }}>

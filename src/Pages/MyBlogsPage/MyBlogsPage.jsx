@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import NavBar from "../../Components/NavBar/NavBar";
-import img from "../../../public/blog-img.jpg"
+import img from "../../../public/blog-img.jpg";
 
 const myBlogs = [
   {
@@ -33,7 +33,12 @@ function MyBlogsPage() {
     <>
       <NavBar />
       <Container sx={{ mt: 4 }}>
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          mb={3}
+        >
           <Typography variant="h4">My Blogs</Typography>
           <Button component={Link} to="/write" variant="contained">
             + New Blog
@@ -74,7 +79,9 @@ function MyBlogsPage() {
                       color="error"
                       variant="outlined"
                       size="small"
-                      onClick={() => alert("I will impliment the delete function later")}
+                      onClick={() =>
+                        alert("I will impliment the delete function later")
+                      }
                     >
                       Delete
                     </Button>
@@ -88,6 +95,5 @@ function MyBlogsPage() {
     </>
   );
 }
-
 
 export default MyBlogsPage;

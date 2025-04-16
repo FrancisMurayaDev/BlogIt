@@ -1,3 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL + "/api";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default apiUrl;

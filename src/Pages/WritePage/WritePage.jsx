@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import NavBar from "../../Components/NavBar/NavBar";
-import apiUrl from "../../utils/apiUrl.js"; 
+import apiUrl from "../../utils/apiUrl.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

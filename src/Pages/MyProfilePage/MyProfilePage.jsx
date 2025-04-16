@@ -85,6 +85,20 @@ export default function MyProfilePage() {
   const handlePasswordChange = (e) =>
     setPasswordInfo({ ...passwordInfo, [e.target.name]: e.target.value });
 
+  const handleUpdatePersonalInfo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.put(`${apiUrl}/profile`, personalInfo, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert("Profile updated successfully!");
+    } catch (err) {
+      console.error("Update failed:", err);
+      alert("Failed to update profile.");
+    }
+  };
+  
+
   return (
     <>
       <NavBar />
@@ -116,6 +130,10 @@ export default function MyProfilePage() {
                 >
                   Upload Profile Photo
                 </Button>
+
+                <Button variant="contained" sx={{ mt: 2 }} onClick={handleUpdatePersonalInfo}>
+  Update Personal Info
+</Button>
                 <input
                   type="file"
                   accept="image/*"

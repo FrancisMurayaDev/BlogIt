@@ -97,7 +97,6 @@ export default function MyProfilePage() {
       alert("Failed to update profile.");
     }
   };
-  
 
   return (
     <>
@@ -122,7 +121,10 @@ export default function MyProfilePage() {
             </Typography>
             <Box component="form" sx={{ mt: 2 }}>
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
-                <Avatar src={profileImage} sx={{ width: 72, height: 72, mr: 2 }} />
+                <Avatar
+                  src={profileImage}
+                  sx={{ width: 72, height: 72, mr: 2 }}
+                />
 
                 <Button
                   variant="outlined"
@@ -131,9 +133,13 @@ export default function MyProfilePage() {
                   Upload Profile Photo
                 </Button>
 
-                <Button variant="contained" sx={{ mt: 2 }} onClick={handleUpdatePersonalInfo}>
-  Update Personal Info
-</Button>
+                <Button
+                  variant="contained"
+                  sx={{ mt: 2 }}
+                  onClick={handleUpdatePersonalInfo}
+                >
+                  Update Personal Info
+                </Button>
                 <input
                   type="file"
                   accept="image/*"

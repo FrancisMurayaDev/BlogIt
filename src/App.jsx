@@ -9,6 +9,8 @@ import ArticlePage from "./Pages/ArticlePage/ArticlePage";
 import MyBlogsPage from "./Pages/MyBlogsPage/MyBlogsPage";
 import EditBlogPage from "./Pages/EditBlogPage/EditBlogPage";
 import MyProfilePage from "./Pages/MyProfilePage/MyProfilePage";
+import BlogDetailsPage from "./Pages/BlogsDetailsPage/BlogsDetailsPage";
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path="/myblogs" element={<MyBlogsPage />} />
         <Route path="/edit/:id" element={<EditBlogPage />} />
         <Route path="/profile" element={<MyProfilePage />} />
+        <Route path="/blogs/:id" element={<BlogDetailsPage />} />
       </Routes>
     </>
   );

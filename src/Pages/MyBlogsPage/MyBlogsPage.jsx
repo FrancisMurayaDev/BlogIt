@@ -24,7 +24,7 @@ function MyBlogsPage() {
     const fetchMyBlogs = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${apiUrl}/api/blogs/mine`, {
+        const res = await axios.get(`${apiUrl}/blogs/mine`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -67,48 +67,57 @@ function MyBlogsPage() {
           <Grid container spacing={3}>
             {blogs.map((blog) => (
               <Grid item xs={12} md={6} key={blog.id}>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    height="180"
-                    image={blog.image || "/default.jpg"}
-                    alt={blog.title}
-                  />
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                      {blog.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {blog.excerpt}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      display="block"
-                      sx={{ mt: 1 }}
-                    >
-                      Created on {new Date(blog.createdAt).toLocaleDateString()}
-                    </Typography>
+                <Link
+                  to={`/blogs/${blog.id}`}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Card>
+                    <CardMedia
+                      component="img"
+                      height="180"
+                      image={blog.image || "/default.jpg"}
+                      alt={blog.title}
+                    />
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        {blog.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {blog.excerpt}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        sx={{ mt: 1 }}
+                      >
+                        Created on {new Date(blog.createdAt).toLocaleDateString()}
+                      </Typography>
 
-                    <Box mt={2} display="flex" justifyContent="space-between">
-                      <Button
-                        component={Link}
-                        to={`/edit/${blog.id}`}
-                        variant="outlined"
-                        size="small"
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        color="error"
-                        variant="outlined"
-                        size="small"
-                        onClick={() => alert("Delete feature coming soon")}
-                      >
-                        Delete
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
+                      <Box mt={2} display="flex" justifyContent="space-between">
+                        <Button
+                          component={Link}
+                          to={`/edit/${blog.id}`}
+                          variant="outlined"
+                          size="small"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          color="error"
+                          variant="outlined"
+                          size="small"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            alert("Delete feature coming soon");
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Link>
               </Grid>
             ))}
           </Grid>

@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
   CircularProgress,
+  Snackbar,
 } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import NavBar from "../../Components/NavBar/NavBar";
@@ -19,6 +20,7 @@ export default function MyProfilePage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const [profileInfo, setProfileInfo] = useState({
     phone: "",
@@ -91,10 +93,40 @@ export default function MyProfilePage() {
       await axios.put(`${apiUrl}/profile`, personalInfo, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert("Profile updated successfully!");
+      setSuccessMessage("Personal info updated successfully!");
     } catch (err) {
       console.error("Update failed:", err);
-      alert("Failed to update profile.");
+      setError("Failed to update personal info.");
+    }
+  };
+
+  const handlePasswordUpdate = async () => {
+    if (passwordInfo.newPassword !== passwordInfo.confirmNewPassword) {
+      return setError("New passwords do not match.");
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      await axios.put(
+        `${apiUrl}/profile/password`,
+        {
+          oldPassword: passwordInfo.oldPassword,
+          newPassword: passwordInfo.newPassword,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setPasswordInfo({
+        oldPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
+      setSuccessMessage("Password updated successfully!");
+    } catch (err) {
+      console.error("Password update failed:", err);
+      setError(err.response?.data?.message || "Failed to update password.");
     }
   };
 
@@ -116,11 +148,18 @@ export default function MyProfilePage() {
               </Typography>
             )}
 
-            {/* Profile Info */}
+            <Snackbar
+              open={!!successMessage}
+              autoHideDuration={3000}
+              onClose={() => setSuccessMessage("")}
+              message={successMessage}
+            />
+
+      
             <Typography variant="h6" sx={{ mt: 4 }}>
               Profile Info
             </Typography>
-            <Box component="form" sx={{ mt: 2 }}>
+            <Box sx={{ mt: 2 }}>
               <Box display="flex" alignItems="center" sx={{ mb: 2 }}>
                 <Avatar
                   src={profileImage}
@@ -179,17 +218,13 @@ export default function MyProfilePage() {
                 margin="normal"
                 onChange={handleProfileChange}
               />
-
-              <Button variant="contained" sx={{ mt: 2 }}>
-                Save Profile Info
-              </Button>
             </Box>
 
             <Divider sx={{ my: 4 }} />
 
-            {/* Personal Info */}
+            
             <Typography variant="h6">Personal Info</Typography>
-            <Box component="form" sx={{ mt: 2 }}>
+            <Box sx={{ mt: 2 }}>
               <TextField
                 fullWidth
                 label="First Name"
@@ -238,9 +273,9 @@ export default function MyProfilePage() {
 
             <Divider sx={{ my: 4 }} />
 
-            {/* Password Update */}
+            
             <Typography variant="h6">Change Password</Typography>
-            <Box component="form" sx={{ mt: 2 }}>
+            <Box sx={{ mt: 2 }}>
               <TextField
                 fullWidth
                 label="Current Password"
@@ -248,6 +283,7 @@ export default function MyProfilePage() {
                 type="password"
                 required
                 margin="normal"
+                value={passwordInfo.oldPassword}
                 onChange={handlePasswordChange}
               />
               <TextField
@@ -257,6 +293,7 @@ export default function MyProfilePage() {
                 type="password"
                 required
                 margin="normal"
+                value={passwordInfo.newPassword}
                 onChange={handlePasswordChange}
               />
               <TextField
@@ -266,10 +303,15 @@ export default function MyProfilePage() {
                 type="password"
                 required
                 margin="normal"
+                value={passwordInfo.confirmNewPassword}
                 onChange={handlePasswordChange}
               />
 
-              <Button variant="contained" sx={{ mt: 2 }}>
+              <Button
+                variant="contained"
+                sx={{ mt: 2 }}
+                onClick={handlePasswordUpdate}
+              >
                 Update Password
               </Button>
             </Box>

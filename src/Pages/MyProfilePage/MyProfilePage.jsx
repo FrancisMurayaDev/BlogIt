@@ -116,6 +116,7 @@ export default function MyProfilePage() {
               </Typography>
             )}
 
+            {/* Profile Info */}
             <Typography variant="h6" sx={{ mt: 4 }}>
               Profile Info
             </Typography>
@@ -131,14 +132,6 @@ export default function MyProfilePage() {
                   onClick={() => fileInputRef.current.click()}
                 >
                   Upload Profile Photo
-                </Button>
-
-                <Button
-                  variant="contained"
-                  sx={{ mt: 2 }}
-                  onClick={handleUpdatePersonalInfo}
-                >
-                  Update Personal Info
                 </Button>
                 <input
                   type="file"
@@ -194,6 +187,7 @@ export default function MyProfilePage() {
 
             <Divider sx={{ my: 4 }} />
 
+            {/* Personal Info */}
             <Typography variant="h6">Personal Info</Typography>
             <Box component="form" sx={{ mt: 2 }}>
               <TextField
@@ -233,13 +227,18 @@ export default function MyProfilePage() {
                 onChange={handlePersonalChange}
               />
 
-              <Button variant="contained" sx={{ mt: 2 }}>
+              <Button
+                variant="contained"
+                sx={{ mt: 2 }}
+                onClick={handleUpdatePersonalInfo}
+              >
                 Update Personal Info
               </Button>
             </Box>
 
             <Divider sx={{ my: 4 }} />
 
+            {/* Password Update */}
             <Typography variant="h6">Change Password</Typography>
             <Box component="form" sx={{ mt: 2 }}>
               <TextField

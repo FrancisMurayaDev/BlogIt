@@ -4,6 +4,7 @@ import {
   Typography,
   CircularProgress,
   Avatar,
+  Divider,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -61,18 +62,26 @@ export default function BlogDetailsPage() {
     <>
       <NavBar />
       <Container maxWidth="md" sx={{ mt: 5 }}>
-        <Typography variant="h3" gutterBottom>
+        <Typography variant="h3" gutterBottom fontWeight={600}>
           {blog.title}
         </Typography>
 
         <Box display="flex" alignItems="center" mb={2}>
-          <Avatar sx={{ mr: 1 }}>
-            {blog.author?.username?.charAt(0).toUpperCase()}
+          <Avatar sx={{ mr: 2, bgcolor: "primary.main" }}>
+            {blog.author?.username?.[0]?.toUpperCase() || "U"}
           </Avatar>
-          <Typography variant="body2" color="text.secondary">
-            By <strong>{blog.author?.username}</strong> ·{" "}
-            {new Date(blog.createdAt).toLocaleDateString()}
-          </Typography>
+          <Box>
+            <Typography variant="subtitle2">
+              {blog.author?.username || "Unknown Author"}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {new Date(blog.createdAt).toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </Typography>
+          </Box>
         </Box>
 
         {blog.image && (
@@ -82,15 +91,18 @@ export default function BlogDetailsPage() {
             alt={blog.title}
             sx={{
               width: "100%",
-              maxHeight: 400,
-              borderRadius: 2,
+              maxHeight: 450,
               objectFit: "cover",
+              borderRadius: 3,
               mb: 3,
+              boxShadow: 1,
             }}
           />
         )}
 
-        <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
+        <Divider sx={{ mb: 3 }} />
+
+        <Typography variant="body1" sx={{ whiteSpace: "pre-line", lineHeight: 1.7 }}>
           {blog.body}
         </Typography>
       </Container>

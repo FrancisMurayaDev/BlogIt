@@ -46,6 +46,7 @@ export default function WritePage() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
+
       formData.append("title", blogData.title);
       formData.append("excerpt", blogData.excerpt);
       formData.append("body", blogData.body);
@@ -63,7 +64,7 @@ export default function WritePage() {
       console.log("Blog posted:", res.data);
       navigate("/myblogs");
     } catch (err) {
-      console.error("Blog post failed:", err.response?.data);
+      console.error("Blog post failed:", err);
       setError(err.response?.data?.message || "Failed to post blog");
     } finally {
       setLoading(false);

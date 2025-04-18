@@ -11,7 +11,6 @@ import EditBlogPage from "./Pages/EditBlogPage/EditBlogPage";
 import MyProfilePage from "./Pages/MyProfilePage/MyProfilePage";
 import BlogDetailsPage from "./Pages/BlogsDetailsPage/BlogsDetailsPage";
 
-
 function App() {
   return (
     <>

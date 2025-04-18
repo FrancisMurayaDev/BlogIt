@@ -102,7 +102,10 @@ export default function BlogDetailsPage() {
 
         <Divider sx={{ mb: 3 }} />
 
-        <Typography variant="body1" sx={{ whiteSpace: "pre-line", lineHeight: 1.7 }}>
+        <Typography
+          variant="body1"
+          sx={{ whiteSpace: "pre-line", lineHeight: 1.7 }}
+        >
           {blog.body}
         </Typography>
       </Container>

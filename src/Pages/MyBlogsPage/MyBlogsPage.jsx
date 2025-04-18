@@ -90,7 +90,8 @@ function MyBlogsPage() {
                         display="block"
                         sx={{ mt: 1 }}
                       >
-                        Created on {new Date(blog.createdAt).toLocaleDateString()}
+                        Created on{" "}
+                        {new Date(blog.createdAt).toLocaleDateString()}
                       </Typography>
 
                       <Box mt={2} display="flex" justifyContent="space-between">

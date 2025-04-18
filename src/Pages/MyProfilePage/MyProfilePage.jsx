@@ -115,7 +115,7 @@ export default function MyProfilePage() {
         },
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       setPasswordInfo({
@@ -155,7 +155,6 @@ export default function MyProfilePage() {
               message={successMessage}
             />
 
-      
             <Typography variant="h6" sx={{ mt: 4 }}>
               Profile Info
             </Typography>
@@ -222,7 +221,6 @@ export default function MyProfilePage() {
 
             <Divider sx={{ my: 4 }} />
 
-            
             <Typography variant="h6">Personal Info</Typography>
             <Box sx={{ mt: 2 }}>
               <TextField
@@ -273,7 +271,6 @@ export default function MyProfilePage() {
 
             <Divider sx={{ my: 4 }} />
 
-            
             <Typography variant="h6">Change Password</Typography>
             <Box sx={{ mt: 2 }}>
               <TextField

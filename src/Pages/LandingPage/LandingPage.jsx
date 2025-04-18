@@ -2,7 +2,7 @@ import NavBar from "../../Components/NavBar/NavBar";
 import { Box, Typography, Button, Container, Stack } from "@mui/material";
 import heroImage from "../../../public/hero-bg.jpg";
 
-function LandingPage() {
+export default function LandingPage() {
   return (
     <>
       <NavBar />
@@ -12,11 +12,13 @@ function LandingPage() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          py: { xs: 10, md: 15 },
+          py: { xs: 10, md: 18 },
           px: 2,
           color: "#fff",
           position: "relative",
-          zIndex: 1,
+          minHeight: "90vh",
+          display: "flex",
+          alignItems: "center",
           "&::before": {
             content: '""',
             position: "absolute",
@@ -24,33 +26,54 @@ function LandingPage() {
             left: 0,
             width: "100%",
             height: "100%",
-            bgcolor: "rgba(40, 24, 86, 0.6)",
-            zIndex: -1,
+            bgcolor: "rgba(25, 25, 112, 0.6)",
+            zIndex: 0,
           },
         }}
       >
-        <Container maxWidth="md" sx={{ textAlign: "center" }}>
-          <Typography variant="h3" fontWeight="bold" gutterBottom>
-            Share your story with the World
+        <Container maxWidth="md" sx={{ position: "relative", zIndex: 1, textAlign: "center" }}>
+          <Typography
+            variant="h2"
+            fontWeight="bold"
+            gutterBottom
+            sx={{ lineHeight: 1.2 }}
+          >
+            Share Your Voice with the World
           </Typography>
-          <Typography variant="h6" color="inherit" gutterBottom>
-            A platform for writers to publish, manage and share their
-            experiences and thoughts.
+
+          <Typography
+            variant="h6"
+            color="inherit"
+            sx={{ mt: 2, fontWeight: 400 }}
+          >
+            Publish your stories. Inspire others. Make your mark.
           </Typography>
-          <Stack direction="row" spacing={2} justifyContent="center" mt={4}>
+
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2} justifyContent="center" mt={5}>
             <Button
               variant="contained"
-              color="primary"
               size="large"
               href="/signup"
+              sx={{
+                fontWeight: 600,
+                px: 4,
+              }}
             >
               Start Writing
             </Button>
             <Button
               variant="outlined"
-              color="inherit"
               size="large"
-              href="/signup"
+              href="/blogs"
+              sx={{
+                fontWeight: 600,
+                px: 4,
+                color: "#fff",
+                borderColor: "#fff",
+                "&:hover": {
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                },
+              }}
             >
               Explore Stories
             </Button>
@@ -60,5 +83,3 @@ function LandingPage() {
     </>
   );
 }
-
-export default LandingPage;

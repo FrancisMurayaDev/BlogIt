@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import NavBar from "../../Components/NavBar/NavBar";
-import apiUrl from "../../utils/apiUrl.js";
+import apiUrl from "../../utils/apiUrl";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +17,8 @@ export default function WritePage() {
     title: "",
     excerpt: "",
     body: "",
-    image: "",
   });
+  const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -31,11 +31,9 @@ export default function WritePage() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-        setBlogData((prev) => ({ ...prev, image: reader.result }));
-      };
+      reader.onloadend = () => setImagePreview(reader.result);
       reader.readAsDataURL(file);
     }
   };
@@ -47,11 +45,18 @@ export default function WritePage() {
 
     try {
       const token = localStorage.getItem("token");
+      const formData = new FormData();
+      formData.append("title", blogData.title);
+      formData.append("excerpt", blogData.excerpt);
+      formData.append("body", blogData.body);
+      if (imageFile) {
+        formData.append("image", imageFile);
+      }
 
-      const res = await axios.post(`${apiUrl}/blogs`, blogData, {
+      const res = await axios.post(`${apiUrl}/blogs`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
 

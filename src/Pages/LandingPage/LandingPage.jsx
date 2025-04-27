@@ -66,7 +66,7 @@ export default function LandingPage() {
               size="large"
               href="/blogs"
               sx={{
-                fontWeight: 600,
+                fontWeight: 700,
                 px: 4,
                 color: "#fff",
                 borderColor: "#fff",
